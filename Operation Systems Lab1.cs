@@ -81,7 +81,7 @@ namespace OSfirst
             Console.Read();
             using (FileStream fstream = new FileStream($@"{path}\user.json", FileMode.OpenOrCreate))
             {
-                Person Egor = new Person() { Name = "Egor", Age = 19 };
+                Person Egor = new Person() { Name = "Vova", Age = 21 };
                 await JsonSerializer.SerializeAsync<Person>(fstream, Egor);
                 Console.WriteLine("Файл был создан и уже содержит данные");
             }
@@ -101,11 +101,11 @@ namespace OSfirst
             Console.Read();
             XDocument xdoc = new XDocument(new XElement("people",
                 new XElement("person",
-                    new XAttribute("name", "Egorik"),
+                    new XAttribute("name", "Egor"),
                     new XElement("company", "Microsoft"),
                     new XElement("age", 19)),
                 new XElement("person",
-                    new XAttribute("name", "Vova"),
+                    new XAttribute("name", "Vovan"),
                     new XElement("company", "Google"),
                     new XElement("age", 21))));
             xdoc.Save($@"{path}\people.xml");
@@ -185,10 +185,10 @@ namespace OSfirst
             Console.Read();
             using (ZipArchive zipArchive = ZipFile.Open(zipFile, ZipArchiveMode.Update))
             {
-                zipArchive.CreateEntryFromFile(@"C:\OS1\keks.txt", "keks.txt");
+                zipArchive.CreateEntryFromFile(@"C:\OS1\KEKW.txt", "KEKW.txt");
             }
             Console.Read();
-            Console.Write($"keks.txt добавлен в архив {zipFile}\n");
+            Console.Write($"KEKW.txt добавлен в архив {zipFile}\n");
             Console.Read();
             ZipFile.ExtractToDirectory(zipFile, sourceFolder);
             Console.WriteLine($"Архив {zipFile} распакован в папку {sourceFolder}");
@@ -202,7 +202,7 @@ namespace OSfirst
             Console.WriteLine("Файлы из Task 5 удалены");
             Console.Read();
             Directory.Delete(path, true);
-            Console.WriteLine("OS1 удалена с вашего компьютера ;)))");
+            Console.WriteLine("OS1 удалена с вашего компьютера :D");
         }
     }
 }
