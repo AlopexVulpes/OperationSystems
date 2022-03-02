@@ -13,8 +13,8 @@ namespace OSfirst
 {
     class Person
     {
-        public string Name {get; set;}
-        public int Age {get; set;}
+        public string Name { get; set; }
+        public int Age { get; set; }
     }
     class Program
     {
@@ -53,7 +53,7 @@ namespace OSfirst
             Console.WriteLine("Введите строку для записи в файл:");
             string text = Console.ReadLine();
 
-                // запись в файл
+            // запись в файл
             using (FileStream fstream = new FileStream($@"{path}\test.txt", FileMode.Append))
             {
                 byte[] array = System.Text.Encoding.Default.GetBytes(text);
@@ -62,7 +62,7 @@ namespace OSfirst
                 //Console.WriteLine("Текст записан в файл");
             }
 
-                // чтение из файла
+            // чтение из файла
             using (FileStream fstream = File.OpenRead($@"{path}\test.txt"))
             {
                 byte[] array = new byte[fstream.Length];
@@ -72,10 +72,17 @@ namespace OSfirst
                 string textFromFile = System.Text.Encoding.Default.GetString(array);
                 Console.WriteLine($"Текст из файла: {textFromFile}");
             }
+            Console.WriteLine("Удалить файл y/n");
+            string Check1 = Console.ReadLine();
+            if (Check1 == "y" )
+            {
+                File.Delete($@"{path}\test.txt");
+                Console.WriteLine("Файл test.txt удалён");
+                Console.WriteLine();
+            }
 
-            File.Delete($@"{path}\test.txt");
-            Console.WriteLine("Файл test.txt удалён");
-            Console.WriteLine();
+
+
 
             Console.Write("Task 3:");
             Console.Read();
@@ -90,11 +97,15 @@ namespace OSfirst
                 Person restoredPerson = await JsonSerializer.DeserializeAsync<Person>(fstream);
                 Console.WriteLine($"Name: {restoredPerson.Name}  Age: {restoredPerson.Age}");
             }
-            File.Delete($@"{path}\user.json");
-            Console.WriteLine("Файл user.json удалён");
-            Console.WriteLine();
+            Console.WriteLine("Удалить файл y/n");
+            string Check2 = Console.ReadLine();
+            if (Check2 == "y")
+            {
+                File.Delete($@"{path}\user.json");
+                Console.WriteLine("Файл user.json удалён");
+                Console.WriteLine();
+            }
             Console.Read();
-
             Console.Write("Task 4:");
             Console.Read();
             Console.WriteLine();
@@ -162,9 +173,16 @@ namespace OSfirst
                 }
                 Console.WriteLine();
             }
-            File.Delete($@"{path}\people.xml");
-            Console.WriteLine("Файл people.xml удалён");
-            Console.WriteLine();
+            Console.WriteLine("Удалить файл y/n");
+            string Check3 = Console.ReadLine();
+            if (Check3 == "y")
+            {
+                File.Delete($@"{path}\people.xml");
+                Console.WriteLine("Файл people.xml удалён");
+                Console.WriteLine();
+            }
+
+
 
 
             Console.Write("Task 5:");
@@ -177,7 +195,7 @@ namespace OSfirst
                 dirInfoo.Create();
             }
             Console.Read();
-            using (FileStream fstream = new FileStream($@"{path}\keks.txt", FileMode.CreateNew)){}
+            using (FileStream fstream = new FileStream($@"{path}\KEKW.txt", FileMode.CreateNew)) { }
             string sourceFolder = @"C:\OS1\zip\";
             string zipFile = @"C:\OS1\zip.zip";
             ZipFile.CreateFromDirectory(sourceFolder, zipFile);
@@ -194,15 +212,37 @@ namespace OSfirst
             Console.WriteLine($"Архив {zipFile} распакован в папку {sourceFolder}");
             Console.WriteLine();
             Console.Read();
-            foreach (FileInfo file in dirInfo.GetFiles())
+
+            Console.WriteLine("Удалить файлы y/n");
+            string Check4 = Console.ReadLine();
+            if (Check4 == "y")
             {
-                file.Delete();
+
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+                Directory.Delete(sourceFolder, true);
+                Console.WriteLine("Файлы из Task удалены");
+                Console.Read();
             }
-            Directory.Delete(sourceFolder, true);
-            Console.WriteLine("Файлы из Task 5 удалены");
-            Console.Read();
-            Directory.Delete(path, true);
-            Console.WriteLine("OS1 удалена с вашего компьютера :D");
+            Console.WriteLine("Удалить папку? y/n");
+            string Check5 = Console.ReadLine();
+            if (Check5 == "y")
+            {
+                Directory.Delete(path, true);
+                Console.WriteLine("OS1 удалена с вашего компьютера :D");
+            }
+            Console.WriteLine();
+
+
+
+
+
+
+
+
+
         }
     }
 }
